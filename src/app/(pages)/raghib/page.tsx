@@ -6,7 +6,7 @@ const page = () => {
     <>
     <div className='bg-gradient-to-r from-cyan-400 to-blue-300 flex items-center justify-center h-screen'>
       
-      <div className='bg-white bg-blur-sm bg-opacity-75 p-6 rounded-2xl shadow-[0px_-18px_0px_12px_rgba(255,_255,_255,_0.5)] w-96 flex gap-x-5 '>
+      <div className='bg-white bg-blur-sm bg-opacity-75 p-6 rounded-2xl shadow-[0px_-4px_0px_12px_rgba(255,_255,_255,_0.5)] w-96 flex gap-x-5 '>
         <Image src='/profile.jpeg' alt="Remote Example" width={50} height={50} className='w-12 h-12 object-cover rounded-full'/>
 
         <div>
