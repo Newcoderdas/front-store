@@ -9,7 +9,7 @@ const Bar = () => {
               
     <Link href="/akber" className='hover:text-gray-300'> Akber ka Page</Link>
     <Link href="/raghib" className='hover:text-gray-300'>raghib ka Page</Link>
-    <Link href="/daniya" className='hover:text-gray-300'>Daniyal ka Page</Link>
+    <Link href="/daniyal" className='hover:text-gray-300'>Daniyal ka Page</Link>
     
      </div>
   )
