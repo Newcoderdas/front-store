@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { Heart, Search, ShoppingCart } from 'lucide-react'
+import Image from 'next/image'
 
 const Bar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -38,6 +39,7 @@ const Bar = () => {
         <nav className="container mx-auto px-4 pl-20 py-4 ">
           <div className="flex justify-between items-center">
             <div className="flex items-center w-full ">
+              <Image src="/front-store.png" alt="logo" width={50} height={30} />
               <h1 className="text-2xl font-bold mr-24">Front-Store</h1>
               <div className='flex mx-auto'>
 
