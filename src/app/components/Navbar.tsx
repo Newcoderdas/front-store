@@ -13,7 +13,8 @@ const Bar = () => {
   
   return (
     <>
-      <div className="flex max-w-[100rem] mx-auto bg-black text-white text-sm py-2">
+      <header className="border-b">
+      <div className="flex max-w-[100rem] mx-auto bg-black text-white text-sm py-2 ">
 
         <div className="flex mx-auto items-center gap-2">
           <p className="text-center text-xs flex-1 md:text-md">
@@ -34,8 +35,7 @@ const Bar = () => {
           </div>
       </div>
 
-      <header className="border-b">
-        <nav className="container mx-auto px-4 pl-20 py-4">
+        <nav className="container mx-auto px-4 pl-20 py-4 ">
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <h1 className="text-2xl font-bold mr-24">Front-Store</h1>
