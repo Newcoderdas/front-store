@@ -37,35 +37,38 @@ const Bar = () => {
 
         <nav className="container mx-auto px-4 pl-20 py-4 ">
           <div className="flex justify-between items-center">
-            <div className="flex items-center">
+            <div className="flex items-center w-full ">
               <h1 className="text-2xl font-bold mr-24">Front-Store</h1>
+              <div className='flex mx-auto'>
+
               <ul className="hidden md:flex space-x-8 mt-1">
                
-                  <li className="block py-2 hover:font-medium border-black hover:border-b-2 transition-transform">
+                  <li className="block  hover:font-medium border-black hover:border-b-2 transition-transform">
                     <Link href="">
                       Home
                     </Link>
                   </li>
 
-                  <li className="block py-2 hover:font-medium border-black hover:border-b-2 transition-transform">
+                  <li className="block  hover:font-medium border-black hover:border-b-2 transition-transform">
                     <Link href="">
                       About
                     </Link>
                   </li>
 
-                  <li className="block py-2 hover:font-medium border-black hover:border-b-2 transition-transform">
+                  <li className="block  hover:font-medium border-black hover:border-b-2 transition-transform">
                     <Link href="">
                       Contact
                     </Link>
                   </li>
 
-                  <li className="block py-2 hover:font-medium border-black hover:border-b-2 transition-transform">
+                  <li className="block  hover:font-medium border-black hover:border-b-2 transition-transform">
                     <Link href="">
                       Signup
                     </Link>
                   </li>
                 
               </ul>
+                      </div>
             </div>
 
             <div className="hidden md:flex items-center space-x-4">
@@ -73,13 +76,13 @@ const Bar = () => {
                 <input
                   type="search"
                   placeholder="What are you looking for?"
-                  className={`border rounded-md py-2 px-3 pr-10 focus:outline-none focus:ring-2 focus:ring-primary ${
+                  className={`border rounded-md py-2 px-3 placeholder:text-sm pr-10 focus:outline-none focus:ring-2 focus:ring-primary ${
                     isSearchFocused ? 'ring-2 ring-primary' : ''
                   }`}
                   onFocus={() => setIsSearchFocused(true)}
                   onBlur={() => setIsSearchFocused(false)}
                 />
-                <Search className={`absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 ${
+                <Search className={`absolute right-3 cursor-pointer top-1/2 -translate-y-1/2 h-5 w-5 ${
                   isSearchFocused ? 'text-primary' : 'text-gray-400'
                 }`} />
               </div>
