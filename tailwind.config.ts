@@ -14,6 +14,9 @@ export default {
       },
       fontFamily: {
         'Allerta': ["Allerta Stencil", "serif"]
+      },
+      backgroundImage: {
+        'background': "url('/1.jpg')",
       }
     },
   },
