@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Carousel from './components/Carousel'
+import Flashsales from './components/Flashsales'
 
 const page = () => {
   return (
@@ -24,6 +25,8 @@ const page = () => {
         </div>
 
     </div>
+
+    <div><Flashsales/></div>
     
     </>
   )

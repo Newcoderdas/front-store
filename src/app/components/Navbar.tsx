@@ -43,7 +43,7 @@ const Bar = () => {
               <h1 className="text-2xl font-bold mr-24">Front-Store</h1>
               <div className='flex mx-auto'>
 
-              <ul className="hidden md:flex space-x-8 mt-1">
+              <ul className="hidden lg:flex space-x-8 mt-1">
                
                   <li className="block  hover:font-medium border-black hover:border-b-2 transition-transform">
                     <Link href="">
@@ -73,7 +73,7 @@ const Bar = () => {
                       </div>
             </div>
 
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
               <div className="relative">
                 <input
                   type="search"
@@ -97,7 +97,7 @@ const Bar = () => {
             </div>
 {/* hamburger */}
             <button
-              className="md:hidden text-black focus:outline-none"
+              className="lg:hidden text-black focus:outline-none"
               onClick={closeNav}
               aria-label="Toggle menu"
             >
