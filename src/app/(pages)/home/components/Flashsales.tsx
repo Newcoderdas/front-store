@@ -1,4 +1,4 @@
-  'use client'
+'use client'
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import React from 'react'
 import { useState, useEffect } from "react";

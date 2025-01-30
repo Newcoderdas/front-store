@@ -1,0 +1,55 @@
+const flashSales = [
+    {
+        id: 1,
+        name: "HAVIT HV-G92 Gamepad",
+        price: 120,
+        originalPrice: 160,
+        discount: 40,
+        image: "/laptop.jpg",
+        rating: 5,
+        reviews: 88,
+      },
+      {
+        id: 2,
+        name: "AK-900 Wired Keyboard",
+        price: 960,
+        originalPrice: 1160,
+        discount: 35,
+        image: "/laptop.jpg",
+        rating: 4,
+        reviews: 75,
+      },
+      {
+        id: 3,
+        name: "IPS LCD Gaming Monitor",
+        price: 370,
+        originalPrice: 400,
+        discount: 30,
+        image: "/laptop.jpg",
+        rating: 5,
+        reviews: 99,
+      },
+      {
+        id: 4,
+        name: "S-Series Comfort Chair",
+        price: 375,
+        originalPrice: 400,
+        discount: 25,
+        image: "/laptop.jpg",
+        rating: 4.5,
+        reviews: 99,
+      },
+      {
+        id: 5,
+        name: "S-Series Gaming Chair",
+        price: 375,
+        originalPrice: 400,
+        discount: 25,
+        image: "/laptop.jpg",
+        rating: 5,
+        reviews: 99,
+      },
+] 
+
+export default flashSales;
+    
