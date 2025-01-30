@@ -1,8 +1,7 @@
 "use client"
-
 import { Heart, Eye } from "lucide-react"
 import React, { forwardRef } from "react";
-
+import flashSales from "../../../../../data/items";
 
 interface Product {
   id: number
@@ -15,74 +14,11 @@ interface Product {
   reviews: number
 }
 
-const products: Product[] = [
-  {
-    id: 1,
-    name: "HAVIT HV-G92 Gamepad",
-    image: "/iphone14.jpg",
-    price: 120,
-    originalPrice: 160,
-    discount: 40,
-    rating: 5,
-    reviews: 88,
-  },
-  {
-    id: 2,
-    name: "AK-900 Wired Keyboard",
-    image: "/iphone14.jpg",
-    price: 960,
-    originalPrice: 1160,
-    discount: 35,
-    rating: 4,
-    reviews: 75,
-  },
-  {
-    id: 3,
-    name: "IPS LCD Gaming Monitor",
-    image: "/iphone14.jpg",
-    price: 370,
-    originalPrice: 400,
-    discount: 30,
-    rating: 5,
-    reviews: 99,
-  },
-  {
-    id: 4,
-    name: "S-Series Comfort Chair",
-    image: "/iphone14.jpg",
-    price: 375,
-    originalPrice: 400,
-    discount: 25,
-    rating: 4.5,
-    reviews: 99,
-  },
-  {
-    id: 5,
-    name: "Gaming Mouse Pro",
-    image: "/iphone14.jpg",
-    price: 250,
-    originalPrice: 300,
-    discount: 20,
-    rating: 4,
-    reviews: 65,
-  },
-  {
-    id: 6,
-    name: "Ultra HD Webcam",
-    image: "/iphone14.jpg",
-    price: 500,
-    originalPrice: 600,
-    discount: 15,
-    rating: 5,
-    reviews: 120,
-  },
-]
-
 const Cards = forwardRef<HTMLDivElement>((_,ref) => {       
     return (
     <div ref={ref} className="overflow-hidden whitespace-nowrap">
   <div className="flex gap-6">
-    {products.map((product) => (
+    {flashSales.map((product) => (
       <div
         key={product.id}
         className="bg-white rounded-lg relative min-w-[250px] group"
@@ -92,7 +28,7 @@ const Cards = forwardRef<HTMLDivElement>((_,ref) => {
             <img
               src={product.image || "/placeholder.svg"}
               alt={product.name}
-              className="object-cover w-full h-full"
+              className="object-cover w-64 h-64 mx-auto"
             />
             <div className="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 rounded text-sm z-10">
               -{product.discount}%
