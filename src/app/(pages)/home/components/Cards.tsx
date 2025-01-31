@@ -56,7 +56,7 @@ const Cards = forwardRef<HTMLDivElement>((_, ref) => {
                 <div className="absolute top-3 right-3 flex flex-col gap-2">
                   <button
                     className={`p-2 rounded-full shadow-sm ${
-                      clickedHearts.get(product.id) ? "bg-red-500 text-white" : "bg-white text-red-500"
+                      clickedHearts.get(product.id) ? "bg-red-500 text-white" : "bg-white text-black"
                     }`}
                     onClick={() => handleClick(product.id)}
                   >
