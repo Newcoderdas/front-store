@@ -75,7 +75,7 @@ const Flashsales: React.FC = () => {
 <div className='mt-2 max-w-[92rem] mx-auto p-5'>
 
 <div className=' flex items-center gap-2 '>
-  <span className='bg-red-500 px-2 py-5'></span><span className='text-red-600 font-semibold'><h1>Today's</h1></span>
+  <span className='bg-red-500 px-2 py-5'></span><span className='text-red-600 font-semibold'><h1>Today&apos;s</h1></span>
 </div>
 
 <div className='md:flex mx-auto justify-between items-center'>  
