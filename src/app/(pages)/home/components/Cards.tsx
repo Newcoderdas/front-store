@@ -4,16 +4,7 @@ import { forwardRef, useState } from "react";
 import React from "react";
 import flashSales from "../../../../../data/items";
 
-interface Product {
-  id: number;
-  name: string;
-  image: string;
-  price: number;
-  originalPrice: number;
-  discount: number;
-  rating: number;
-  reviews: number;
-}
+
 
 const Cards = forwardRef<HTMLDivElement>((_, ref) => {
   const [clickedHearts, setClickedHearts] = useState<Map<number, boolean>>(new Map());
