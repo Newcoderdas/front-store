@@ -2,12 +2,14 @@ import React from 'react'
 import Link from 'next/link'
 import Carousel from './components/Carousel'
 import Flashsales from './components/Flashsales'
+import Categories from './components/Categories'
+import Bestselling from './components/Bestselling'
 
 const page = () => {
   return (
     <>
     
-    <div className="max-w-[100rem] mx-auto grid sm:grid-cols-12 p-5 gap-x-5 items-center">
+    <div className="max-w-[100rem] mt-24 mx-auto grid sm:grid-cols-12 p-5 gap-x-5 items-center">
 
     <div className="col-span-full text-center sm:col-span-3 sm:flex-col sm:text-start lg:text-sm sm:text-xs font-medium px-6 border-r-2">
        <div className='p-2 hover:scale-105 transition-transform'><Link href=''>Woman&apos;s Fashion</Link></div>
@@ -27,6 +29,8 @@ const page = () => {
     </div>
 
     <div><Flashsales/></div>
+    <div><Categories/></div>
+    <div><Bestselling/></div>
     
     </>
   )

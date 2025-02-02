@@ -1,38 +1,68 @@
-"use client";
-import { Heart, Eye, X } from "lucide-react";
-import { forwardRef, useState } from "react";
-import React from "react";
-import flashSales from "../../../../../data/items";
+"use client"
+import { Heart, Eye, X } from 'lucide-react'
+import React, { useState } from 'react'
+import bestSelling from '../../../../../data/bsitems';
 
+interface Product {
+    id: number;
+    name: string;
+    image: string;
+    price: number;
+    originalPrice: number;
+    discount: number;
+    rating: number;
+    reviews: number;
+  }
 
+const Bestselling = () => {
 
-const Cards = forwardRef<HTMLDivElement>((_, ref) => {
-  const [clickedHearts, setClickedHearts] = useState<Map<number, boolean>>(new Map());
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  const handleClick = (productId: number) => {
-    setClickedHearts((prev) => {
-      const newMap = new Map(prev);
-      newMap.set(productId, !prev.get(productId));
-      return newMap;
-    });
-  };
-
-  const handleEyeClick = (image: string) => {
-    setSelectedImage(image); 
-  };
-
-  const closeModal = () => {
-    setSelectedImage(null); 
-  };
+    const [clickedHearts, setClickedHearts] = useState<Map<number, boolean>>(new Map());
+      const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    
+      const handleClick = (productId: number) => {
+        setClickedHearts((prev) => {
+          const newMap = new Map(prev);
+          newMap.set(productId, !prev.get(productId));
+          return newMap;
+        });
+      };
+    
+      const handleEyeClick = (image: string) => {
+        setSelectedImage(image); 
+      };
+    
+      const closeModal = () => {
+        setSelectedImage(null); 
+      };
 
   return (
-    <div ref={ref} className="overflow-hidden whitespace-nowrap">
-      <div className="flex gap-6">
-        {flashSales.map((product) => (
+    <>
+      <div className='mt-4 max-w-[92rem] p-10 mx-auto'>
+      <div className=' flex items-center gap-2 '>
+       <span className='bg-red-500 px-2 py-5'></span><span className='text-red-600 font-semibold'><h1>This Month</h1></span>
+    </div>
+
+    <div className='md:flex mx-auto justify-between items-center'>  
+
+<div className="mt-3 lg:flex items-center gap-16">
+  <div>
+      <h1 className='text-2xl lg:text-4xl font-bold'>Best Selling Products</h1>
+  </div>  
+</div>
+
+
+<div>  
+<button className='bg-red-500 text-sm text-white p-2.5 px-10 mt-4 hover:bg-red-600 transition transform'>View All</button>
+</div>
+
+</div>
+{/* cards */}
+<div className="mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+        {bestSelling.map((product) => (
           <div
             key={product.id}
-            className="bg-white rounded-lg relative min-w-[250px] group">
+            className="bg-white rounded-lg relative max-w-[250px] group">
             <div className="p-2">
               <div className="aspect-square relative mb-1 overflow-hidden">
                 <img
@@ -46,7 +76,7 @@ const Cards = forwardRef<HTMLDivElement>((_, ref) => {
                 <div className="absolute top-3 right-3 flex flex-col gap-2">
                   <button
                     className={`p-2 rounded-full shadow-sm ${
-                      clickedHearts.get(product.id) ? "bg-red-500 text-white" : "bg-white text-black"
+                      clickedHearts.get(product.id) ? "bg-red-500 text-white" : "bg-white text-red-500"
                     }`}
                     onClick={() => handleClick(product.id)}
                   >
@@ -106,7 +136,10 @@ const Cards = forwardRef<HTMLDivElement>((_, ref) => {
         </div>
       )}
     </div>
-  );
-});
-Cards.displayName = "Cards";
-export default Cards;
+
+      </div>
+    </>
+  )
+}
+
+export default Bestselling

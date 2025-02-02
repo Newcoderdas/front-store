@@ -102,4 +102,5 @@ const flashSales = [
 ];
 
 export default flashSales;
+
     
