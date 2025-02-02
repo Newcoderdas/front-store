@@ -14,7 +14,7 @@ const Bar = () => {
   
   return (
     <>
-      <header className="border-b">
+      <header className="border-b fixed top-0 left-0 w-full shadow-sm bg-white z-50">
       <div className="flex max-w-[100rem] mx-auto bg-black text-white text-sm py-2 ">
 
         <div className="flex mx-auto items-center gap-2">
