@@ -2,6 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import Carousel from './components/Carousel'
 import Flashsales from './components/Flashsales'
+import Categories from './components/Categories'
+import Bestselling from './components/Bestselling'
 
 const page = () => {
   return (
@@ -27,6 +29,8 @@ const page = () => {
     </div>
 
     <div><Flashsales/></div>
+    <div><Categories/></div>
+    <div><Bestselling/></div>
     
     </>
   )

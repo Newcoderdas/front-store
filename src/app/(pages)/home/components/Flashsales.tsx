@@ -72,7 +72,7 @@ const Flashsales: React.FC = () => {
   return (
     <>
 
-<div className='mt-2 max-w-[92rem] mx-auto p-5'>
+  <div className='mt-2 max-w-[92rem] p-10 mx-auto'>
 
 <div className=' flex items-center gap-2 '>
   <span className='bg-red-500 px-2 py-5'></span><span className='text-red-600 font-semibold'><h1>Today's</h1></span>
