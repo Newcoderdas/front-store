@@ -4,16 +4,14 @@ import React, { useState, useEffect } from 'react'
 import bestSelling from '../../../../../data/bsitems';
 import axios from 'axios';
 
-interface product {
-    id: number;
-    name: string;
-    image: string;
-    price: number;
-    originalPrice: number;
-    discount: number;
-    rating: number;
-    reviews: number;
-  }
+// interface product {
+//     id: number;
+//     title: string;
+//     media: string;
+//     price: number;
+//     discount: number;
+//     description: string;
+//   }
 
 const Bestselling = () => {
 
@@ -24,8 +22,9 @@ const Bestselling = () => {
       useEffect(() => {
         const fetchProducts = async () => {
           try{
-            const res = await axios.get("api/getproduct");
-            setProducts(res.data);
+            const res = await axios.get("/api/getproduct");
+            // console.log("this is the response :",res?.data);
+            setProducts(res?.data);
           } catch (error) {
             console.error("Error Fetching Products", error);
           }
@@ -73,14 +72,14 @@ const Bestselling = () => {
 {/* cards */}
 <div className="mt-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-        {bestSelling.map((product) => (
+        {products.map((product:any) => (
           <div
             key={product.id}
             className="bg-white rounded-lg relative max-w-[250px] group">
             <div className="p-2">
               <div className="aspect-square relative mb-1 overflow-hidden">
                 <img
-                  src={product.image || "/placeholder.svg"}
+                  src={product.media || "/placeholder.svg"}
                   alt={product.name}
                   className="object-cover w-64 h-64 mx-auto"
                 />
@@ -108,10 +107,10 @@ const Bestselling = () => {
                   Add To Cart
                 </button>
               </div>
-              <h3 className="font-bold mb-1">{product.name}</h3>
+              <h3 className="font-bold mb-1">{product.title}</h3>
               <div className="flex gap-2 mb-1">
-                <span className="text-red-500">${product.price}</span>
-                <span className="text-gray-400 line-through">${product.originalPrice}</span>
+                <span className="text-red-500">${product.price - ( product.price / 100 * product.discount) }</span>
+                <span className="text-gray-400 line-through">${product.price}</span>
               </div>
               <div className="flex items-center gap-1 mb-1">
                 {[...Array(5)].map((_, i) => (
