@@ -1,9 +1,10 @@
 "use client"
 import { Heart, Eye, X } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import bestSelling from '../../../../../data/bsitems';
+import axios from 'axios';
 
-interface Product {
+interface product {
     id: number;
     name: string;
     image: string;
@@ -18,6 +19,19 @@ const Bestselling = () => {
 
     const [clickedHearts, setClickedHearts] = useState<Map<number, boolean>>(new Map());
       const [selectedImage, setSelectedImage] = useState<string | null>(null);
+      const [products, setProducts] = useState([]);
+
+      useEffect(() => {
+        const fetchProducts = async () => {
+          try{
+            const res = await axios.get("api/getproduct");
+            setProducts(res.data);
+          } catch (error) {
+            console.error("Error Fetching Products", error);
+          }
+        };
+        fetchProducts();
+      },[])
     
       const handleClick = (productId: number) => {
         setClickedHearts((prev) => {
