@@ -25,20 +25,15 @@ const Page = () => {
     e.preventDefault();
     setLoading(true);
 
-    const formData = new FormData();
-    formData.append("title", sendProduct.title);
-    formData.append("description", sendProduct.description);
-    formData.append("price", sendProduct.price);
-    formData.append("discount", sendProduct.discount);
-    formData.append("media", sendProduct.media);
+    // const formData = new FormData();
+    // formData.append("title", sendProduct.title);
+    // formData.append("description", sendProduct.description);
+    // formData.append("price", sendProduct.price);
+    // formData.append("discount", sendProduct.discount);
+    // formData.append("media", sendProduct.media);
 
     try {
-      const response = await axios.post("/api/addproduct", {
-        ...formData,
-        price: Number(formData.price), // Ensure price is a number
-        discount: Number(formData.discount),
-    
-      });
+      const response = await axios.post("/api/addproduct",{title:sendProduct.title,price:sendProduct.price,discount:sendProduct.discount,description:sendProduct.description,media:sendProduct.media});
       setMessage(response.data.message);
       console.log(response.data)
       setSendProduct({ title: "", description: "", price: "", discount: "", media: "" }); // Reset form
