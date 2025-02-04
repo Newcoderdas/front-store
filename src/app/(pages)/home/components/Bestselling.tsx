@@ -1,7 +1,6 @@
 "use client"
 import { Heart, Eye, X } from 'lucide-react'
 import React, { useState, useEffect } from 'react'
-import bestSelling from '../../../../../data/bsitems';
 import axios from 'axios';
 
 // interface product {
@@ -23,7 +22,6 @@ const Bestselling = () => {
         const fetchProducts = async () => {
           try{
             const res = await axios.get("/api/getproduct");
-            // console.log("this is the response :",res?.data);
             setProducts(res?.data);
           } catch (error) {
             console.error("Error Fetching Products", error);

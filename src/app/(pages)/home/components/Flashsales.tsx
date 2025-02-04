@@ -85,28 +85,28 @@ const Flashsales: React.FC = () => {
       <h1 className='text-2xl lg:text-4xl font-bold'>Flash Sales</h1>
   </div>
 
-  <div className="mt-4 lg:mt-0 flex space-x-4 mb-4">
-  <div className="flex flex-col items-center">
-    <span className="text-xs lg:text-xs  uppercase">Days</span>
-    <span className="text-2xl lg:text-4xl font-bold">{days}</span>
-  </div>
-  <span className="text-2xl lg:text-4xl mt-3 text-red-500">:</span>
-  <div className="flex flex-col items-center">
-    <span className="text-xs lg:text-xs  uppercase">Hours</span>
-    <span className="text-2xl lg:text-4xl font-bold">{hours}</span>
-  </div>
-  <span className="text-2xl lg:text-4xl mt-3 text-red-500">:</span>
-  <div className="flex flex-col items-center">
-    <span className="text-xs lg:text-xs  uppercase">Minutes</span>
-    <span className="text-2xl lg:text-4xl font-bold">{minutes}</span>
-  </div>
-  <span className="text-2xl lg:text-4xl mt-3 text-red-500">:</span>
+    <div className="mt-4 lg:mt-0 flex space-x-4 mb-4">
+    <div className="flex flex-col items-center">
+      <span className="text-xs lg:text-xs  uppercase">Days</span>
+      <span className="text-2xl lg:text-4xl font-bold">{days}</span>
+    </div>
+    <span className="text-2xl lg:text-4xl mt-3 text-red-500">:</span>
+    <div className="flex flex-col items-center">
+      <span className="text-xs lg:text-xs  uppercase">Hours</span>
+      <span className="text-2xl lg:text-4xl font-bold">{hours}</span>
+    </div>
+    <span className="text-2xl lg:text-4xl mt-3 text-red-500">:</span>
+    <div className="flex flex-col items-center">
+      <span className="text-xs lg:text-xs  uppercase">Minutes</span>
+      <span className="text-2xl lg:text-4xl font-bold">{minutes}</span>
+    </div>
+    <span className="text-2xl lg:text-4xl mt-3 text-red-500">:</span>
 
-  <div className="flex flex-col items-center">
-    <span className="text-xs lg:text-xs  uppercase">Seconds</span>
-    <span className="text-2xl lg:text-4xl font-bold">{seconds}</span>
+    <div className="flex flex-col items-center">
+      <span className="text-xs lg:text-xs  uppercase">Seconds</span>
+      <span className="text-2xl lg:text-4xl font-bold">{seconds}</span>
+    </div>
   </div>
-</div>
 </div>
 
 <div className='flex gap-1'>  
