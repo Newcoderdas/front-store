@@ -9,6 +9,7 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json(); // Parse request body
     const { title, description, price, discount, media } = body;
+    
 
     if (!title || !description || price === undefined) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
