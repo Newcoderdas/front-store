@@ -9,12 +9,12 @@ const Sidenavbar = () => {
      <Sidebar className='bg-gray-400 border-r-4 h-screen max-w-[100px] md:max-w-[200px] absolute'>
       <Sidebar.Items>
         <Sidebar.ItemGroup className='text-xs md:text-sm'>
-          <Sidebar.Item href="#" icon={HiChartPie}>
+          <Sidebar.Item href="/admin/dashboard" icon={HiChartPie}>
             Dashboard
           </Sidebar.Item>
           <Sidebar.Collapse icon={HiShoppingBag} label="Products">
-            <Sidebar.Item >Product list</Sidebar.Item>
-            <Sidebar.Item href="#">Add Product</Sidebar.Item>
+            <Sidebar.Item href="/admin/dashboard/productlist">Product list</Sidebar.Item>
+            <Sidebar.Item href="/admin/dashboard/addproduct">Add Product</Sidebar.Item>
             <Sidebar.Item href="#">Refunds</Sidebar.Item>
             <Sidebar.Item href="#">Shipping</Sidebar.Item>
           </Sidebar.Collapse>
