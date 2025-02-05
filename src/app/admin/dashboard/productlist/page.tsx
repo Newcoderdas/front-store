@@ -4,22 +4,34 @@ import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { format } from 'date-fns';
 import UpdateModal from '../../component/UpdateModal';
+import { Spinner } from 'flowbite-react';
 interface ProductProps{
-  _id: String;
+  _id: string;
+  title: string;
+  price: number;
+  discount: number;
+  media: string;
+  createdAt: string;
+  
 }
 const page = () => {
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductProps[]>([]);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
 
       useEffect(() => {
         const fetchProducts = async () => {
           try{
-            const res = await axios.get("/api/getproduct");
+            setIsLoading(true);
+            const res = await axios.get<ProductProps[]>("/api/getproduct");
             setProducts(res?.data);
+            setIsLoading(false);
           } catch (error) {
             console.error("Error Fetching Products", error);
+          }finally{
+            setIsLoading(false);
           }
         };
         fetchProducts();
@@ -43,8 +55,13 @@ const page = () => {
       <h1 className="text-lg lg:text-4xl md:text-2xl font-bold">Product List</h1>
     </div>
 
-    <div className="mt-4 overflow-x-auto">
-      <table className="bg-white border min-w-full md:min-w-[72rem] md:ml-[200px] shadow-md rounded-lg">
+    <div className="mt-4 overflow-hidden">
+      {isLoading ? (
+         <div className="flex justify-center items-center h-20">
+         <div className="w-10 h-10 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+         </div>
+      ):(    
+        <table className="bg-white border min-w-full md:min-w-[72rem] md:ml-[200px] shadow-md rounded-lg">
         <thead className="bg-red-200 uppercase">
           <tr className="text-left">
             <th className="p-3">Image</th>
@@ -78,12 +95,14 @@ const page = () => {
           })}
         </tbody>
         </table>
+      )};
         <UpdateModal
-         isOpen={isModalOpen}
+        isOpen={isModalOpen}
          onClose={() => setModalOpen(false)}
          title="Add Item Details"
          onSubmit={handleFormSubmit}
         />
+        <Spinner color="failure" aria-label="Failure spinner example" />
     </div>
 </>
   );
