@@ -5,8 +5,8 @@ import product from '../../../../../models/product';
 
 
 
-export async function DELETE(req: NextRequest, { params }: any) {
-  const {id} = params;
+export async function DELETE(req: NextRequest, context: { params: { id: string } }) {
+  const {id} = context.params;
   try {
     await dbConnect();
     const result = await product.findByIdAndDelete(id);

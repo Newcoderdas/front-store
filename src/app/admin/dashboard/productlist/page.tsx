@@ -1,10 +1,17 @@
 "use client"
 import axios from 'axios';
+import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-
+import { format } from 'date-fns';
+import UpdateModal from '../../component/UpdateModal';
+interface ProductProps{
+  _id: String;
+}
 const page = () => {
 
   const [products, setProducts] = useState([]);
+  const [isModalOpen, setModalOpen] = useState(false);
+
 
       useEffect(() => {
         const fetchProducts = async () => {
@@ -16,7 +23,19 @@ const page = () => {
           }
         };
         fetchProducts();
-      },[])
+      }, [])
+  const handleDelete = async (id:String)=>{
+    try {
+      await axios.delete(`/api/product-delete/${id}`);
+      setProducts((prevProducts)=>prevProducts.filter((product)=> product._id !== id));
+    } catch (error) {
+      console.log(error)
+    }
+  
+  }
+  const handleFormSubmit = (data: { title: string; description: string; price: number; discount: number; url: string }) => {
+    console.log("Form Data Submitted:", data);
+  };
 
   return (
 <>
@@ -49,16 +68,22 @@ const page = () => {
                 <td className="p-3">Rs. {product.price}</td>
                 <td className="p-3 text-red-500">${product.price - ( product.price / 100 * product.discount) }</td>
                 <td className="p-3 text-green-600 font-bold">{product.discount}%</td>
-                <td className="p-3">{product.createdAt}</td>
+                <td className="p-3">{format(new Date(product.createdAt), 'dd MMM yyyy, hh:mm a')}</td>
                 <td className="p-3 flex gap-2 justify-center">
-                  <button className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600">Update</button>
-                  <button className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600">Delete</button>
+                  <button onClick={()=>setModalOpen(true)} className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600">Update</button>
+                  <button onClick={()=>handleDelete(product._id)} className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600">Delete</button>
                 </td>
               </tr>
             );
           })}
         </tbody>
-      </table>
+        </table>
+        <UpdateModal
+         isOpen={isModalOpen}
+         onClose={() => setModalOpen(false)}
+         title="Add Item Details"
+         onSubmit={handleFormSubmit}
+        />
     </div>
 </>
   );

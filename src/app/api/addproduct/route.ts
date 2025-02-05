@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     await dbConnect(); // Connect to MongoDB
 
     const body = await req.json(); // Parse request body
-    const { title, description, price, discount, media } = body;
+    const { title, description, price, discount, media  } = body;
     
 
     if (!title || !description || price === undefined) {
