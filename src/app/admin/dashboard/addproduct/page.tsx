@@ -45,8 +45,10 @@ const Page = () => {
   };
 
   return (
-    <div className="pt-10 flex flex-col mx-auto max-w-sm lg:max-w-md">
+    <div className="flex flex-col mx-auto max-w-sm lg:max-w-md">
+      <div className="pt-10 flex justify-center">
       <h1 className="text-lg lg:text-4xl md:text-2xl font-bold">Add Products</h1>
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -56,7 +58,7 @@ const Page = () => {
 
         <div>
           <Label className="text-xs md:text-md font-bold" value="Description:" />
-          <Textarea name="description" placeholder="Product Description" required rows={4} value={sendProduct.description} onChange={handleChange} className="border rounded-md border-black" />
+          <Textarea name="description" placeholder="Product Description" required rows={4} value={sendProduct.description} onChange={handleChange} className="border p-1 rounded-md border-black" />
         </div>
 
         <div>
@@ -74,7 +76,7 @@ const Page = () => {
           <TextInput name="media" placeholder="URL" required value={sendProduct.media} onChange={handleChange} className="border rounded-md border-black" />
         </div>
 
-        <Button type="submit" className="bg-gray-400 text-black w-full mt-4 hover:bg-gray-500" disabled={loading}>
+        <Button type="submit" className="bg-red-400 text-black w-full mt-4 hover:bg-red-500" disabled={loading}>
           {loading ? "Submitting..." : "Submit"}
         </Button>
 

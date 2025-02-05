@@ -70,9 +70,9 @@ const Bestselling = () => {
 {/* cards */}
 <div className="mt-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-        {products.map((product:any) => (
+        {products.map((product:any, index:number) => (
           <div
-            key={product.id}
+            key={product.id || index}
             className="bg-white rounded-lg relative max-w-[250px] group">
             <div className="p-2">
               <div className="aspect-square relative mb-1 overflow-hidden">

@@ -1,8 +1,10 @@
 import React from 'react'
-import Navbar from '@/app/components/Navbar'
-import Footer from '@/app/components/Footer'
+import Navbar from '../../../components/Navbar';
+import Footer from '../../../components/Footer';
+
 
 const Userlayout = ({children}: any ) => {
+  console.log("Userlayout Rendered");
   return (
     <>
         <Navbar/>
