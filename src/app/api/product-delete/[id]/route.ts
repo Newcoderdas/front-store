@@ -9,7 +9,7 @@ export async function DELETE(req: NextRequest, context: { params: { id: string }
   const {id} = context.params;
   try {
     await dbConnect();
-    const result = await product.findByIdAndDelete(id);
+    const result = await product.findByIdAndDelete({_id: id});
     if (!result) {
       return NextResponse.json({ error: 'product not found' }, { status: 404 });
     }
