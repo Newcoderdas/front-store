@@ -4,10 +4,13 @@ import { Sidebar } from "flowbite-react";
 import { HiChartPie, HiShoppingBag, HiMenu } from "react-icons/hi";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Sidenavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname(); 
 
+  const getLink = (path: string) => (pathname === path ? "bg-gray-100" : "");
   return (
     <>
       
@@ -30,18 +33,18 @@ const Sidenavbar = () => {
         <Sidebar.Items className="font-bold">
           <Sidebar.ItemGroup>
             <Link href="/admin/dashboard" passHref>
-              <Sidebar.Item  className="text-xl mb-2 mt-2 md:mt-0 font-bold" as="div" icon={HiChartPie}>
+              <Sidebar.Item  className={`${getLink('/admin/dashboard')} text-xl mb-2 mt-2 md:mt-0 font-bold`} as="div" icon={HiChartPie}>
                 Dashboard
               </Sidebar.Item>
             </Link>
-
+        
             <Sidebar.Collapse icon={HiShoppingBag} label="Products">
               <Link href="/admin/dashboard/productlist" passHref>
-                <Sidebar.Item as="div">Product list</Sidebar.Item>
+                <Sidebar.Item as="div" className={getLink('/admin/dashboard/productlist')} >Product list</Sidebar.Item>
               </Link>
 
               <Link href="/admin/dashboard/addproduct" passHref>
-                <Sidebar.Item as="div">Add Product</Sidebar.Item>
+                <Sidebar.Item as="div" className={getLink('/admin/dashboard/addproduct')}>Add Product</Sidebar.Item>
               </Link>
             </Sidebar.Collapse>
           </Sidebar.ItemGroup>
