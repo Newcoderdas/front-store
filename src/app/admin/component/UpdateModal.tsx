@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 interface ModalFormProps {
   title?: string;
   onSubmit: (formData: { title: string; description: string; price: number; discount: number; url: string }) => void;
   isOpen: boolean;
   onClose: () => void;
+  productId?: string | null;
 }
 
-const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmit, isOpen, onClose }) => {
+const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmit, isOpen, onClose, productId}) => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -16,6 +18,25 @@ const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmi
     discount: 0,
     url: "",
   });
+
+  useEffect(() => {
+    if (productId) {
+      axios.get(`/api/get-product-by-id/${productId}`)
+        .then((res) => {
+          setFormData({
+            title: res.data.title || "",
+            description: res.data.description || "",
+            price: res.data.price || 0,
+            discount: res.data.discount || 0,
+            url: res.data.url || "",
+          });
+        })
+        .catch((error) => console.error("Error fetching product:", error));
+    } else {
+
+      setFormData({ title: "", description: "", price: 0, discount: 0, url: "" });
+    }
+  }, [productId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -27,7 +48,6 @@ const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmi
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
-    setFormData({ title: "", description: "", price: 0, discount: 0, url: "" });
     onClose();
   };
 
@@ -96,7 +116,7 @@ const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmi
                 type="submit"
                 className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
               >
-                Submit
+                Update
               </button>
             </div>
           </form>

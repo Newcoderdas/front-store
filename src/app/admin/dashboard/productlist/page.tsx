@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { format } from 'date-fns';
 import UpdateModal from '../../component/UpdateModal';
-import { Spinner } from 'flowbite-react';
+
 interface ProductProps{
   _id: string;
   title: string;
@@ -15,7 +15,8 @@ interface ProductProps{
   
 }
 const page = () => {
-
+  
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [products, setProducts] = useState<ProductProps[]>([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -46,7 +47,12 @@ const page = () => {
   
   }
   const handleFormSubmit = (data: { title: string; description: string; price: number; discount: number; url: string }) => {
-    console.log("Form Data Submitted:", data);
+    console.log("Form Data Submitted:",{ ...data, productId: selectedProductId });
+  };
+
+  const handleUpdateClick = (id: string) => {
+    setSelectedProductId(id);
+    setModalOpen(true);
   };
 
   return (
@@ -55,13 +61,13 @@ const page = () => {
       <h1 className="text-lg lg:text-4xl md:text-2xl font-bold">Product List</h1>
     </div>
 
-    <div className="mt-4 overflow-hidden">
+    <div className="mt-4 overflow-x-auto">
       {isLoading ? (
          <div className="flex justify-center items-center h-20">
          <div className="w-10 h-10 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
          </div>
       ):(    
-        <table className="bg-white border min-w-full md:min-w-[72rem] md:ml-[200px] shadow-md rounded-lg">
+        <table className="bg-white border min-w-full lg:min-w-[67rem] md:min-w-[56rem] md:ml-[200px] shadow-md rounded-lg">
         <thead className="bg-red-200 uppercase">
           <tr className="text-left">
             <th className="p-3">Image</th>
@@ -87,7 +93,7 @@ const page = () => {
                 <td className="p-3 text-green-600 font-bold">{product.discount}%</td>
                 <td className="p-3">{format(new Date(product.createdAt), 'dd MMM yyyy, hh:mm a')}</td>
                 <td className="p-3 flex gap-2 justify-center">
-                  <button onClick={()=>setModalOpen(true)} className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600">Update</button>
+                  <button onClick={()=>handleUpdateClick(product._id)} className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600">Update</button>
                   <button onClick={()=>handleDelete(product._id)} className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600">Delete</button>
                 </td>
               </tr>
@@ -101,8 +107,9 @@ const page = () => {
          onClose={() => setModalOpen(false)}
          title="Add Item Details"
          onSubmit={handleFormSubmit}
+         productId={selectedProductId}
         />
-        <Spinner color="failure" aria-label="Failure spinner example" />
+        
     </div>
 </>
   );
