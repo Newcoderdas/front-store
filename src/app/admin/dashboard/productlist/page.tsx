@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { format } from "date-fns";
 import UpdateModal from "../../component/UpdateModal";
@@ -20,12 +20,13 @@ const Page = () => {
   const [products, setProducts] = useState<ProductProps[]>([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
+  
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setIsLoading(true);
-        const res = await axios.get<ProductProps[]>("/api/getproduct");
+        const res = await axios.get("/api/getproduct");
+        
         setProducts(res?.data);
         setIsLoading(false);
       } catch (error) {
@@ -57,7 +58,25 @@ const Page = () => {
   }) => {
     console.log("Form Data Submitted:", { ...data, productId: selectedProductId });
   };
-  
+  useEffect(() => {
+    const fetchUpdatedProduct = async () => {
+      if (!isModalOpen && selectedProductId) {
+        try {
+          const res = await axios.get(`/api/get-product-by-id/${selectedProductId}`);
+          console.log("responses",res)
+          const updatedProduct = res.data;
+          setProducts((prevProducts) =>
+            prevProducts.map((product) =>
+              product._id === selectedProductId ? updatedProduct : product
+            )
+          );
+        } catch (error) {
+          console.error("Error updating product", error);
+        }
+      }
+    };
+    fetchUpdatedProduct();
+  }, [isModalOpen, selectedProductId]);
 
   const handleUpdateClick = (id: string) => {
     setSelectedProductId(id);
