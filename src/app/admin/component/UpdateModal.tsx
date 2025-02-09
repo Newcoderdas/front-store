@@ -28,7 +28,7 @@ const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmi
             description: res.data.description || "",
             price: res.data.price || 0,
             discount: res.data.discount || 0,
-            url: res.data.url || "",
+            url: res.data.media || "",
           });
         })
         .catch((error) => console.error("Error fetching product:", error));
@@ -45,7 +45,7 @@ const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmi
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit =  (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
     onClose();
