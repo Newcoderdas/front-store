@@ -1,70 +1,31 @@
-// import type { NextApiRequest, NextApiResponse } from 'next';
-// import { dbConnect } from '../../../../../lib/dbConnect';
-// import User from '../../../../../models/users';
+import bcrypt from 'bcryptjs';
+import { NextResponse } from 'next/server';
+import User from '../../../../../models/users';
+import { dbConnect } from '../../../../../lib/dbConnect';
 
-// export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-//   if (req.method !== 'POST') {
-//     return res.status(405).json({ message: 'Method Not Allowed' });
-//   }
-
-//   const { first_name, last_name, email, password } = req.body;
-
-//   if (!first_name || !last_name || !email || !password) {
-//     return res.status(400).json({ message: 'All fields are required.' });
-//   }
-
-//   try {
-//     // Connect to the database
-//     await dbConnect();
-
-//     // Check if the user already exists
-//     const existingUser = await User.findOne({ email });
-//     if (existingUser) {
-//       return res.status(400).json({ message: 'User already exists.' });
-//     }
-
-//     // Create a new user
-//     const newUser = new User({
-//       first_name,
-//       last_name,
-//       email,
-//       password,
-//     });
-
-//     await newUser.save();
-//     res.status(201).json({ message: 'User registered successfully', user: newUser });
-//   } catch (error: any) {
-//     res.status(500).json({ message: 'Internal Server Error', error: error.message });
-//   }
-// }
-import type { NextApiRequest, NextApiResponse } from "next";
-import { dbConnect } from "../../../../../lib/dbConnect";
-import User from "../../../../../models/users";
-import mongoose from "mongoose";
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method Not Allowed" });
-  }
-
+export async function POST(req: Request) {
   try {
     await dbConnect();
 
-    const { _id } = req.body;
-    const objectId = _id?.$oid ? new mongoose.Types.ObjectId(_id.$oid) : new mongoose.Types.ObjectId();
+    const { email, password } = await req.json();
 
-    const newUser = await User.create({
-      _id: objectId,
-      first_name: "John",
-      last_name: "Doe",
-      email: "johndoe@example.com",
-      password: "123456",
-      isVerified: false,
-      isAdmin: false,
-    });
+    if (!email || !password) {
+      return NextResponse.json({ message: 'Email and password are required.' }, { status: 400 });
+    }
 
-    res.status(201).json({ message: "User inserted successfully", user: newUser });
-  } catch (error: any) {
-    res.status(500).json({ message: "Failed to insert data", error: error.message });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return NextResponse.json({ message: 'User already exists.' }, { status: 409 });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ email, password: hashedPassword });
+    await newUser.save();
+
+    return NextResponse.json({ message: 'User registered successfully.' }, { status: 201 });
+
+  } catch (error) {
+    console.error('Registration error:', error);
+    return NextResponse.json({ message: 'Internal server error.' }, { status: 500 });
   }
 }
