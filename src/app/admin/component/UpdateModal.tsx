@@ -4,7 +4,7 @@ import axios from "axios";
 
 interface ModalFormProps {
   title?: string;
-  onSubmit: (formData: { title: string; description: string; price: number; discount: number; url: string }) => void;
+  onSubmit: (formData: { title: string; description: string; price: number; discount: number; media: string }) => void;
   isOpen: boolean;
   onClose: () => void;
   productId?: string | null;
@@ -16,11 +16,14 @@ const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmi
     description: "",
     price: 0,
     discount: 0,
-    url: "",
+    media: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsloading] = useState(false);
 
   useEffect(() => {
     if (productId) {
+      setIsloading(true); 
       axios.get(`/api/get-product-by-id/${productId}`)
         .then((res) => {
           setFormData({
@@ -28,15 +31,15 @@ const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmi
             description: res.data.description || "",
             price: res.data.price || 0,
             discount: res.data.discount || 0,
-            url: res.data.url || "",
+            media: res.data.media || "",
           });
         })
-        .catch((error) => console.error("Error fetching product:", error));
+        .catch((error) => console.error("Error fetching product:", error))
+        .finally(() => setIsloading(false)); 
     } else {
-
-      setFormData({ title: "", description: "", price: 0, discount: 0, url: "" });
+      setFormData({ title: "", description: "", price: 0, discount: 0, media: "" });
     }
-  }, [productId]);
+  }, [productId, isOpen]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -45,12 +48,20 @@ const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmi
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
-    onClose();
+    setLoading(true);
+    
+    try {
+      await axios.put(`/api/product-edit/${productId}`, formData);
+      onSubmit(formData);
+      onClose();
+    } catch (error) {
+      console.error("Error updating product:", error);
+    } finally {
+      setLoading(false);
+    }
   };
-
   return (
     isOpen && (
       <motion.div
@@ -59,7 +70,15 @@ const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmi
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
+        
         <div className="bg-white w-full max-w-lg mx-auto p-6 rounded-2xl shadow-lg">
+        {isLoading ? (
+            // ✅ Proper Loader
+            <div className="flex justify-center items-center h-20">
+              <div className="w-10 h-10 border-4 border-gray-700 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          ) : (
+            <>
           <h2 className="text-xl font-semibold mb-4">{title}</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
@@ -98,12 +117,13 @@ const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmi
             />
             <input
               type="url"
-              name="url"
+              name="media"
               placeholder="Image URL"
-              value={formData.url}
+              value={formData.media}
               onChange={handleChange}
               className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
+            
             <div className="flex justify-end gap-4 mt-4">
               <button
                 type="button"
@@ -112,17 +132,18 @@ const UpdateModal: React.FC<ModalFormProps> = ({ title = "Add New Item", onSubmi
               >
                 Cancel
               </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
-              >
-                Update
-              </button>
+              <button type="submit" disabled={loading} className="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600">
+                {loading ? "Updating..." : "Update"} 
+              </button> 
             </div>
+            
           </form>
+          </>
+            )};
         </div>
       </motion.div>
     )
+  
   );
 };
 

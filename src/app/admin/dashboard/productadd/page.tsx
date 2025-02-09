@@ -76,7 +76,7 @@ const Page = () => {
           <TextInput name="media" placeholder="URL" required value={sendProduct.media} onChange={handleChange} className="border rounded-md border-black" />
         </div>
 
-        <Button type="submit" className="bg-red-400 text-black w-full mt-4 hover:bg-red-500" disabled={loading}>
+        <Button type="submit" className="bg-gray-700 text-white w-full mt-4 hover:bg-red-500" disabled={loading}>
           {loading ? "Submitting..." : "Submit"}
         </Button>
 
