@@ -10,7 +10,9 @@ const Sidenavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname(); 
 
-  const getLink = (path: string) => (pathname === path ? "bg-gray-100" : "");
+  const getLink = (path:any) =>
+    pathname === path ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg" : "text-gray-300 hover:text-white hover:bg-gray-700";
+
   return (
     <>
       
@@ -23,12 +25,13 @@ const Sidenavbar = () => {
 
       {/* Sidebar */}
       <Sidebar
-        className={`bg-red-400 border-r-4 min-h-screen fixed z-40 transition-all duration-300 ease-in-out
+        className={`bg-gray-900 bg-opacity-90 backdrop-blur-lg border-r min-h-screen fixed z-40 transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
-          max-w-[200px] `}>
-       <div className="flex pt-10 md:pt-0">
-       <Image src="/front-store.png" alt="logo" width={30} height={30} />
-       <h1 className="text-2xl font-bold">Front-Store</h1>
+          w-[240px] p-5 shadow-2xl rounded-r-2xl`}>
+
+       <div className="flex items-center pt-10 md:pt-0">
+       <Image src="/front-store.png" alt="logo" width={40} height={40} />
+       <h1 className="text-xl text-white font-bold">Front-Store</h1>
        </div>
         <Sidebar.Items className="font-bold">
           <Sidebar.ItemGroup>
@@ -38,13 +41,18 @@ const Sidenavbar = () => {
               </Sidebar.Item>
             </Link>
         
-            <Sidebar.Collapse icon={HiShoppingBag} label="Products">
+            <Sidebar.Collapse 
+            icon={HiShoppingBag} 
+            label="Products"
+            open={pathname.startsWith('/admin/dashboard/product')}
+            className={`hover:bg-gray-700 ${pathname.startsWith('/admin/dashboard/product') ? 'bg-gray-700 text-white' : 'text-gray-300'}`}
+          >
               <Link href="/admin/dashboard/productlist" passHref>
                 <Sidebar.Item as="div" className={getLink('/admin/dashboard/productlist')} >Product list</Sidebar.Item>
               </Link>
 
-              <Link href="/admin/dashboard/addproduct" passHref>
-                <Sidebar.Item as="div" className={getLink('/admin/dashboard/addproduct')}>Add Product</Sidebar.Item>
+              <Link href="/admin/dashboard/productadd" passHref>
+                <Sidebar.Item as="div" className={getLink('/admin/dashboard/productadd')}>Add Product</Sidebar.Item>
               </Link>
             </Sidebar.Collapse>
           </Sidebar.ItemGroup>
