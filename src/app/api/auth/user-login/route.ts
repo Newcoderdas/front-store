@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import User from '../../../../../models/users';
 import { dbConnect } from '../../../../../lib/dbConnect';
 
-const SECRET_KEY = process.env.JWT_SECRET || 'default_secret';
+const SECRET_KEY = process.env.JWT_SECRET;
 
 export async function POST(req: Request) {
   try {
