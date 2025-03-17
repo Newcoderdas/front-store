@@ -9,7 +9,7 @@ const Userlayout = ({children}: any ) => {
     <>
         <Navbar/>
         {children}
-        <Footer/>
+        {/* <Footer/> */}
     </>
   )
 }

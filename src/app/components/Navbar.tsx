@@ -46,7 +46,7 @@ const Bar = () => {
               <ul className="hidden lg:flex space-x-8 mt-1">
                
                   <li className="block  hover:font-medium border-black hover:border-b-2 transition-transform">
-                    <Link href="">
+                    <Link href="/home">
                       Home
                     </Link>
                   </li>
@@ -64,7 +64,7 @@ const Bar = () => {
                   </li>
 
                   <li className="block  hover:font-medium border-black hover:border-b-2 transition-transform">
-                    <Link href="">
+                    <Link href="/signup">
                       Signup
                     </Link>
                   </li>
